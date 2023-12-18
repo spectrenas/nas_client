@@ -20,7 +20,8 @@ allprojects {
 val output: Provider<Directory> = rootProject.layout.buildDirectory.dir("../../build")
 rootProject.layout.buildDirectory.set(output.get())
 subprojects {
-    project.layout.buildDirectory.dir("${output.get().asFile}/${project.name}")
+    val subOutput = project.layout.buildDirectory.dir("${output.get().asFile}/${project.name}")
+    project.layout.buildDirectory.set(subOutput.get())
 }
 
 subprojects {
