@@ -43,7 +43,7 @@ android {
         jvmTarget = "1.8"
     }
 
-    sourceSets["main"].java.srcDir("src/main/kotlin")
+    sourceSets["main"].java.srcDirs.plus(sourceSets["main"].java.srcDirs("src/main/kotlin"))
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
