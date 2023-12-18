@@ -1,0 +1,31 @@
+buildscript {
+    ext.kotlin_version = '1.7.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.layout.buildDirectory.set(rootProject.layout.buildDirectory.dir("../../build").get())
+def output = rootProject.layout.buildDirectory.get().asFile
+subprojects {
+    project.layout.buildDirectory.set(project.layout.buildDirectory.dir("${output}/${project.name}").get())
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete output
+}
